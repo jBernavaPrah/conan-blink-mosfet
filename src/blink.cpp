@@ -1,11 +1,13 @@
-#include <iostream>
-#include "blink.h"
 #include "pico/stdlib.h"
 
 void blink(){
-    #ifdef NDEBUG
-    std::cout << "blink/0.1: Hello World Release!" <<std::endl;
-    #else
-    std::cout << "blink/0.1: Hello World Debug!" <<std::endl;
-    #endif
+    const uint LED_PIN = PICO_DEFAULT_LED_PIN;
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+    while (true) {
+        gpio_put(LED_PIN, 1);
+        sleep_ms(700);
+        gpio_put(LED_PIN, 0);
+        sleep_ms(250);
+    }
 }
